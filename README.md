@@ -68,9 +68,7 @@ configurable so any station can run it.
 
 ## Deploy in one click (Render)
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
-
-> Replace the link above with `https://render.com/deploy?repo=https://github.com/YOUR_ORG/radio-donations-live` once this is on GitHub.
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/fourgrant/radio-donations-live)
 
 1. Click the button. Render reads `render.yaml` and provisions a web service +
    Redis + a small persistent disk for the database.
