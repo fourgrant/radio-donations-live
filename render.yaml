@@ -1,0 +1,58 @@
+# Render Blueprint — one-click deploy.
+# https://render.com/docs/blueprint-spec
+#
+# After clicking "Deploy to Render", you'll be prompted to fill in the values
+# marked `sync: false` below (your Qgiv token, station name, dashboard login).
+services:
+  - type: web
+    name: radio-donations
+    runtime: ruby
+    plan: free            # bump to "starter" to avoid the free tier sleeping between drives
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "./bin/render-start.sh"
+    preDeployCommand: "bundle exec rake db:prepare"
+    disk:
+      name: sqlite-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: RAILS_ENV
+        value: production
+      - key: RACK_ENV
+        value: production
+      - key: RAILS_SERVE_STATIC_FILES
+        value: "true"
+      - key: RAILS_LOG_TO_STDOUT
+        value: "true"
+      - key: SECRET_KEY_BASE
+        generateValue: true
+      - key: SQLITE_DATABASE_PATH
+        value: /var/data/production.sqlite3
+      - key: REDIS_URL
+        fromService:
+          name: radio-donations-redis
+          type: redis
+          property: connectionString
+      # ---- Fill these in at deploy time ----
+      - key: QGIV_API_TOKEN
+        sync: false
+      - key: STATION_NAME
+        sync: false
+      - key: STATION_TIMEZONE
+        value: America/New_York
+      - key: DASHBOARD_USER
+        sync: false
+      - key: DASHBOARD_PASSWORD
+        sync: false
+      - key: APP_HOST
+        sync: false
+      - key: GOAL_AMOUNT
+        sync: false
+      - key: SHOUTOUT_QUESTION
+        sync: false
+
+  - type: redis
+    name: radio-donations-redis
+    plan: free
+    ipAllowList: []        # only reachable from your Render services
+    maxmemoryPolicy: noeviction

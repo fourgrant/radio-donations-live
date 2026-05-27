@@ -1,0 +1,28 @@
+@import "./includes/css/variables.css";
+@import "./includes/css/toggle_wrapper.css";
+@config "./tailwind.config.js";
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@plugin "@tailwindcss/container-queries";
+@plugin "daisyui" {
+  themes: dracula --default, cupcake, bumblebee, emerald, corporate, synthwave, retro, cyberpunk, valentine, halloween, garden, forest, aqua, lofi, pastel, fantasy, wireframe, black, luxury, cmyk, autumn, business, acid, lemonade;
+}
+
+
+body {
+  font-family: Anybody, obvia, sans-serif;
+  @apply m-0 px-12 !pb-44;
+}
+
+h1 {
+  @apply sr-only;
+}
+.cha-ching .text-base-200,.cha-ching .text-base-950,.cha-ching .text-base-800,.cha-ching .text-base-900,.cha-ching .text-base-500,.cha-ching .text-cyan-500,.cha-ching .text-base-100,.cha-ching .text-base-600,.cha-ching .text-base-700,.cha-ching .text-yellow-500 {
+  @apply text-green-500;
+}
+.cha-ching .bg-pink-500, .cha-ching .\!bg-base-800 {
+  @apply !bg-green-500;
+}
+.cha-ching .border-yellow-500 {
+  @apply border-green-500;
+}

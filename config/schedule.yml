@@ -1,0 +1,4 @@
+sync_transactions:
+  cron: 'every 1 minutes'
+  class: 'TransactionSyncJob'
+  queue: default

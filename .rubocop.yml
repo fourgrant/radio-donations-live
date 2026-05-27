@@ -1,0 +1,106 @@
+# .rubocop.yml should reflect team style decisions that deviate from Rubocop.
+
+require: rubocop-rails
+
+AllCops:
+  Exclude:
+    - 'bin/*'
+    - 'script/**/*'
+    - 'tmp/**/*'
+    - 'vendor/**/*'
+    - 'features/**/*'
+  TargetRubyVersion: 2.7
+  TargetRailsVersion: 4.2
+
+## ENABLED COPS ##
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+  Enabled: true
+
+Rails:
+  Enabled: true
+Rails/DynamicFindBy:
+  Whitelist:
+    - find_by_name_cached
+    - find_by_id_cached
+    - find_by_api_token_cached
+    - find_by_sql
+    - find_by_tag_value
+    - find_by_barcode
+
+Rails/UnknownEnv:
+  Environments:
+    - development
+    - production
+    - staging
+    - test
+
+Style/Encoding:
+  Enabled: true
+Style/RegexpLiteral:
+  EnforcedStyle: slashes
+  AllowInnerSlashes: true
+
+## DISABLED COPS ##
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+Metrics/PerceivedComplexity:
+  Enabled: false
+Metrics/AbcSize:
+  Enabled: false
+Metrics/BlockLength:
+  Enabled: false
+Metrics/ClassLength:
+  Enabled: false
+Metrics/MethodLength:
+  Enabled: false
+Metrics/ModuleLength:
+  Enabled: false
+Metrics/ParameterLists:
+  Enabled: false
+
+Layout/LineLength:
+  Enabled: false
+
+Naming/AccessorMethodName:
+  Enabled: false
+Naming/PredicateName:
+  Enabled: false
+Naming/VariableNumber:
+  Enabled: false
+
+Rails/ActionFilter:
+  Enabled: false
+Rails/HasAndBelongsToMany:
+  Enabled: false
+Rails/InverseOf:
+  Enabled: false
+Rails/SkipsModelValidations:
+  Enabled: false
+
+Style/CaseEquality: # We use === for policies, so disable this cop
+  Enabled: false
+Style/AsciiComments:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  Enabled: false
+Style/BlockDelimiters:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Style/DoubleNegation:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/Lambda:
+  Enabled: false
+Style/NumericLiterals:
+  Enabled: false
+Style/ParallelAssignment:
+  Enabled: false
+Style/PerlBackrefs:
+  Enabled: false
+Style/StructInheritance:
+  Enabled: false
