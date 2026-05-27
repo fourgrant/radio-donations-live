@@ -1,18 +1,18 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.2'
+ruby '3.3.9'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.1.4.1'
+gem 'rails', '~> 6.1.7', '>= 6.1.7.10'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 1.4'
+gem 'sqlite3', '~> 1.7'
 # Use Puma as the app server
-gem 'puma', '~> 3.11'
+gem 'puma', '~> 6.4'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem 'webpacker', '~> 4.0'
+gem 'webpacker', '~> 5.4'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -32,10 +32,23 @@ gem 'faraday'
 gem 'sidekiq'
 gem 'sidekiq-cron'
 
+# concurrent-ruby >= 1.3.5 dropped its internal `require 'logger'`, which breaks
+# Rails 6.1 boot on Ruby 3.3 ("uninitialized constant Logger") across every
+# entrypoint (rails, webpack, sidekiq). Pin to the last version that requires it.
+gem 'concurrent-ruby', '1.3.4'
+
+# Default gems Rails 6.1 depends on but that are being unbundled from the
+# Ruby stdlib (3.4+). Declaring them explicitly avoids load-time warnings.
+gem 'logger'
+gem 'mutex_m'
+gem 'bigdecimal'
+gem 'drb'
+gem 'base64'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'pry', '~> 0.13.1'
+  gem 'pry', '~> 0.14'
 end
 
 group :development do

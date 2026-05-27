@@ -115,7 +115,9 @@ Rails.application.configure do
   # (e.g. "donations.mystation.org"); RENDER_EXTERNAL_HOSTNAME is injected
   # automatically by Render for the default *.onrender.com URL. If neither is
   # set, host authorization stays permissive so the app still boots.
-  allowed_hosts = [Settings.app_host, ENV['RENDER_EXTERNAL_HOSTNAME']].compact_blank
+  # NB: read ENV directly — environment config loads before initializers,
+  # so the Settings module isn't defined yet here.
+  allowed_hosts = [ENV['APP_HOST'], ENV['RENDER_EXTERNAL_HOSTNAME']].compact_blank
   if allowed_hosts.any?
     config.hosts += allowed_hosts
     config.action_cable.allowed_request_origins =
